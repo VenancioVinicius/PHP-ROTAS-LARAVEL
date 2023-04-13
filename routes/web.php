@@ -19,7 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::GET('/alunos', function() {
+Route::GET('/aluno', function() {
 
     $dados = array(
     
@@ -29,14 +29,49 @@ Route::GET('/alunos', function() {
         "4 - Danilo"
     );
 
-    $alunos = "<ul>";
+    $aluno = "<ul>";
 
     foreach ($dados as $nome) {
         
-        $alunos .= "<li>$nome</li>";
+        $aluno .= "<li>$nome</li>";
 
     }
 
-    return $alunos;
+    return $aluno;
 
-})->name('alunos');
+})->name('aluno');
+
+Route::get('/aluno/limite/{total}', function($total){
+
+    $dados = array(
+    
+        "1 - Vinicius",
+        "2 - Galdino",
+        "3 - Wesley",
+        "4 - Danilo"
+    );
+
+    $aluno = "<ul>";
+
+    if($total <= count($dados)){
+
+        $cont = 0;
+
+        foreach ($dados as $nome) {
+            
+            $aluno .= "<li>$nome</li>";
+
+            $cont++;
+
+            if($cont >= $total) break;
+
+        }
+    }else{
+
+        $aluno = $aluno."<li>Tamanho Máximo = ".count($dados)."</li>";
+
+    }
+
+    return $aluno;
+
+});
