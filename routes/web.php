@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::GET('/alunos', function() {
+    
+    $alunos = "<ul>
+    
+        <li>1 - Vinicius</li>
+        <li>2 - Galdino</li>
+        <li>3 - Wesley</li>
+    
+    </ul>";
+
+    return $alunos;
+
+})->name('alunos');
