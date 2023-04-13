@@ -74,4 +74,42 @@ Route::get('/aluno/limite/{total}', function($total){
 
     return $aluno;
 
-});
+})->where('total', '[0-9]+');
+
+Route::get('/aluno/matricula/{id}', function($id){
+
+    $dados = array(
+    
+        "1 - Vinicius",
+        "2 - Galdino",
+        "3 - Wesley",
+        "4 - Danilo"
+    );
+
+    $aluno = "<ul>";
+
+    if($id <= count($dados)){
+
+        $cont = 0;
+
+        foreach ($dados as $nome) {
+            
+            $cont++;
+
+            if($cont == $id){
+
+                $aluno .= "<li>$nome</li>";
+                break;
+
+            }
+
+        }
+    }else{
+
+        $aluno = $aluno."<li>NÃO ENCONTRADO!</li>";
+
+    }
+
+    return $aluno;
+
+})->where('id', '[0-9]+');
