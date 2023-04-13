@@ -78,10 +78,11 @@ Route::get('/aluno/limite/{total}', function($total){
 
 })->where('total', '[0-9]+');
 
-Route::get('/aluno/matricula/{id}', function($id){
+Route::get('/aluno/matricula/{matricula}', function($matricula){
 
     $dados = array(
     
+        //array("1 - ", "Vinicius"),
         "1 - Vinicius",
         "2 - Galdino",
         "3 - Wesley",
@@ -91,7 +92,7 @@ Route::get('/aluno/matricula/{id}', function($id){
 
     $aluno = "<ul>";
 
-    if($id <= count($dados)){
+    if($matricula <= count($dados)){
 
         $cont = 0;
 
@@ -99,7 +100,7 @@ Route::get('/aluno/matricula/{id}', function($id){
             
             $cont++;
 
-            if($cont == $id){
+            if($cont == $matricula){
 
                 $aluno .= "<li>$nome</li>";
                 break;
@@ -115,4 +116,30 @@ Route::get('/aluno/matricula/{id}', function($id){
 
     return $aluno;
 
-})->where('id', '[0-9]+');
+})->where('matricula', '[0-9]+');
+
+Route::get('/aluno/nome/{nome}', function($nome){
+
+    $dados = array(
+    
+        array("id" => "1 - ", "nick" => "Vinicius"),
+        array("id" => "2 - ", "nick" => "Galdino" ),
+        array("id" => "3 - ", "nick" => "Wesley"),
+        array("id" => "4 - ", "nick" => "Danilo"),
+        array("id" => "5 - ", "nick" => "Marcola")
+    );
+
+    $aluno = "<ul>";
+
+    foreach ($dados as $nomes) {
+        
+        if($nomes["nick"] == $nome){
+            $aluno .= "<li>".$nomes["id"].$nomes["nick"]."</li>";
+            break;
+        };
+
+    }
+
+    return $aluno;
+
+})->where('nome', '[A-Za-z]+');
