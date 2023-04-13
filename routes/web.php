@@ -2,6 +2,7 @@
 
 use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Route;
+use PhpParser\Node\Stmt\Foreach_;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,14 +20,22 @@ Route::get('/', function () {
 });
 
 Route::GET('/alunos', function() {
+
+    $dados = array(
     
-    $alunos = "<ul>
-    
-        <li>1 - Vinicius</li>
-        <li>2 - Galdino</li>
-        <li>3 - Wesley</li>
-    
-    </ul>";
+        "1 - Vinicius",
+        "2 - Galdino",
+        "3 - Wesley",
+        "4 - Danilo"
+    );
+
+    $alunos = "<ul>";
+
+    foreach ($dados as $nome) {
+        
+        $alunos .= "<li>$nome</li>";
+
+    }
 
     return $alunos;
 
