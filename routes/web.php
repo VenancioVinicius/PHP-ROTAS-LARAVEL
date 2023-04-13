@@ -26,7 +26,8 @@ Route::GET('/aluno', function() {
         "1 - Vinicius",
         "2 - Galdino",
         "3 - Wesley",
-        "4 - Danilo"
+        "4 - Danilo",
+        "5 - Marcola"
     );
 
     $aluno = "<ul>";
@@ -48,7 +49,8 @@ Route::get('/aluno/limite/{total}', function($total){
         "1 - Vinicius",
         "2 - Galdino",
         "3 - Wesley",
-        "4 - Danilo"
+        "4 - Danilo",
+        "5 - Marcola"
     );
 
     $aluno = "<ul>";
@@ -83,7 +85,8 @@ Route::get('/aluno/matricula/{id}', function($id){
         "1 - Vinicius",
         "2 - Galdino",
         "3 - Wesley",
-        "4 - Danilo"
+        "4 - Danilo",
+        "5 - Marcola"
     );
 
     $aluno = "<ul>";
