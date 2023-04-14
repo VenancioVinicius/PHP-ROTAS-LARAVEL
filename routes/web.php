@@ -127,6 +127,7 @@ Route::get('/aluno/nome/{nome}', function($nome){
         array("id" => "3 - ", "nick" => "Wesley"),
         array("id" => "4 - ", "nick" => "Danilo"),
         array("id" => "5 - ", "nick" => "Marcola")
+
     );
 
     $aluno = "<ul>";
@@ -151,3 +152,42 @@ Route::get('/aluno/nome/{nome}', function($nome){
     return $aluno;
 
 })->where('nome', '[A-Za-z]+');
+
+Route::get('/nota', function(){
+
+    $dados = array(
+    
+        array("matricula" => "1", "aluno" => "Vinicius", "nota" => "9"),
+        array("matricula" => "2", "aluno" => "Galdino", "nota" => "2"),
+        array("matricula" => "3", "aluno" => "Wesley", "nota" => "8"),
+        array("matricula" => "4", "aluno" => "Danilo", "nota" => "6"),
+        array("matricula" => "5", "aluno" => "Marcola", "nota" => "4")
+
+    );
+
+    $nota = "<ul>";
+
+    $table  = '<table>';
+    $table .= '<thead>';
+    $table .= '<tr>';
+    $table .= '<td><h3>Matricula</h3></td>';
+    $table .= '<td><h3>Aluno</h3></td>';
+    $table .= '<td><h3>Nota</h3></td>';
+    $table .= '</tr>';
+    $table .= '</thead>';
+    $table .= '<tbody>';
+
+    foreach ($dados as $dado) {
+        $table .= '<tr>';
+        $table .= "<td><center>{$dado["matricula"]}</center></td>";
+        $table .= "<td><center>{$dado["aluno"]}</center></td>";
+        $table .= "<td><center>{$dado["nota"]}</center></td>";
+        $table .= '</tr>';
+    }
+
+    $table .= '</tbody>';
+    $table .= '</table>';
+
+    return $table;
+
+});
