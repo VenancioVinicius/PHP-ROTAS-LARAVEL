@@ -130,13 +130,21 @@ Route::get('/aluno/nome/{nome}', function($nome){
     );
 
     $aluno = "<ul>";
+    $validacao = 0;
 
     foreach ($dados as $nomes) {
         
         if($nomes["nick"] == $nome){
             $aluno .= "<li>".$nomes["id"].$nomes["nick"]."</li>";
+            $validacao = 1;
             break;
         };
+
+    }
+
+    if($validacao == 0){
+
+        $aluno = $aluno."<li>NÃO ENCONTRADO!</li>";
 
     }
 
