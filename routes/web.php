@@ -311,7 +311,7 @@ Route::get('/nota/lancar/{nota}/{matricula}/{nome?}', function($nota, $matricula
     
 })->where('nota', '[0-9]+')->where('matricula', '[0-9]+')->where('nome', '[A-Za-z]+');
 
-/*Route::get('/nota/conceito/{A}/{B}/{C}', function($A, $B, $C){
+Route::get('/nota/conceito/{A}/{B}/{C}', function($A, $B, $C){
 
     $dados = array(
     
@@ -368,9 +368,9 @@ Route::get('/nota/lancar/{nota}/{matricula}/{nome?}', function($nota, $matricula
 
     return $table;
 
-})->where('A', '[0-9]+')->where('B', '[0-9]+')->where('C', '[0-9]+');*/
+})->where('A', '[0-9]+')->where('B', '[0-9]+')->where('C', '[0-9]+');
 
-Route::post('/nota/conceito', function(Request $A){
+Route::post('/nota/conceito', function(Request $request){
 
     $dados = array(
     
@@ -381,6 +381,10 @@ Route::post('/nota/conceito', function(Request $A){
         array("matricula" => "5", "aluno" => "Marcola", "nota" => "4")
 
     );
+
+    $A = $request["A"];
+    $B = $request["B"];
+    $C = $request["C"];
 
     $table  = '<table>';
     $table .= '<thead>';
@@ -394,7 +398,7 @@ Route::post('/nota/conceito', function(Request $A){
 
     foreach ($dados as $dado) {
 
-        /*if($dado["nota"] < $C){
+        if($dado["nota"] < $C){
             $dado["nota"] = "D";
         }else{
 
@@ -412,10 +416,6 @@ Route::post('/nota/conceito', function(Request $A){
                     break;
             }
 
-        }*/
-
-        if($dado["nota"] < $A){
-            $dado["nota"] = "D";
         }
 
         $table .= '<tr>';
