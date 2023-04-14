@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Route;
 use PhpParser\Node\Stmt\Foreach_;
@@ -309,3 +310,125 @@ Route::get('/nota/lancar/{nota}/{matricula}/{nome?}', function($nota, $matricula
     return $table;
     
 })->where('nota', '[0-9]+')->where('matricula', '[0-9]+')->where('nome', '[A-Za-z]+');
+
+/*Route::get('/nota/conceito/{A}/{B}/{C}', function($A, $B, $C){
+
+    $dados = array(
+    
+        array("matricula" => "1", "aluno" => "Vinicius", "nota" => "9"),
+        array("matricula" => "2", "aluno" => "Galdino", "nota" => "2"),
+        array("matricula" => "3", "aluno" => "Wesley", "nota" => "8"),
+        array("matricula" => "4", "aluno" => "Danilo", "nota" => "6"),
+        array("matricula" => "5", "aluno" => "Marcola", "nota" => "4")
+
+    );
+
+    $table  = '<table>';
+    $table .= '<thead>';
+    $table .= '<tr>';
+    $table .= '<td><h3>Matricula</h3></td>';
+    $table .= '<td><h3>Aluno</h3></td>';
+    $table .= '<td><h3>Nota</h3></td>';
+    $table .= '</tr>';
+    $table .= '</thead>';
+    $table .= '<tbody>';
+
+    foreach ($dados as $dado) {
+
+        if($dado["nota"] < $C){
+            $dado["nota"] = "D";
+        }else{
+
+            switch ($dado["nota"]) {
+                case $dado["nota"] >= $C && $dado["nota"] < $B:
+                    $dado["nota"] = "C";
+                    break;
+                
+                case $dado["nota"] >= $B && $dado["nota"] < $A:
+                    $dado["nota"] = "B";
+                    break;
+                
+                case $dado["nota"] >= $A:
+                    $dado["nota"] = "A";
+                    break;
+            }
+
+        }
+
+        $table .= '<tr>';
+        $table .= "<td><center>{$dado["matricula"]}</center></td>";
+        $table .= "<td><center>{$dado["aluno"]}</center></td>";
+        $table .= "<td><center>{$dado["nota"]}</center></td>";
+        $table .= '</tr>';
+
+    }
+
+    $table .= '</tbody>';
+    $table .= '</table>';
+
+    return $table;
+
+})->where('A', '[0-9]+')->where('B', '[0-9]+')->where('C', '[0-9]+');*/
+
+Route::post('/nota/conceito', function(Request $A){
+
+    $dados = array(
+    
+        array("matricula" => "1", "aluno" => "Vinicius", "nota" => "9"),
+        array("matricula" => "2", "aluno" => "Galdino", "nota" => "2"),
+        array("matricula" => "3", "aluno" => "Wesley", "nota" => "8"),
+        array("matricula" => "4", "aluno" => "Danilo", "nota" => "6"),
+        array("matricula" => "5", "aluno" => "Marcola", "nota" => "4")
+
+    );
+
+    $table  = '<table>';
+    $table .= '<thead>';
+    $table .= '<tr>';
+    $table .= '<td><h3>Matricula</h3></td>';
+    $table .= '<td><h3>Aluno</h3></td>';
+    $table .= '<td><h3>Nota</h3></td>';
+    $table .= '</tr>';
+    $table .= '</thead>';
+    $table .= '<tbody>';
+
+    foreach ($dados as $dado) {
+
+        /*if($dado["nota"] < $C){
+            $dado["nota"] = "D";
+        }else{
+
+            switch ($dado["nota"]) {
+                case $dado["nota"] >= $C && $dado["nota"] < $B:
+                    $dado["nota"] = "C";
+                    break;
+                
+                case $dado["nota"] >= $B && $dado["nota"] < $A:
+                    $dado["nota"] = "B";
+                    break;
+                
+                case $dado["nota"] >= $A:
+                    $dado["nota"] = "A";
+                    break;
+            }
+
+        }*/
+
+        if($dado["nota"] < $A){
+            $dado["nota"] = "D";
+        }
+
+        $table .= '<tr>';
+        $table .= "<td><center>{$dado["matricula"]}</center></td>";
+        $table .= "<td><center>{$dado["aluno"]}</center></td>";
+        $table .= "<td><center>{$dado["nota"]}</center></td>";
+        $table .= '</tr>';
+
+    }
+
+    $table .= '</tbody>';
+    $table .= '</table>';
+
+    return $table;
+
+})->where('A', '[0-9]+')->where('B', '[0-9]+')->where('C', '[0-9]+');  
