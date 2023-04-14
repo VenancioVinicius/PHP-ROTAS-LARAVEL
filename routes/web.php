@@ -165,8 +165,6 @@ Route::get('/nota', function(){
 
     );
 
-    $nota = "<ul>";
-
     $table  = '<table>';
     $table .= '<thead>';
     $table .= '<tr>';
@@ -191,3 +189,53 @@ Route::get('/nota', function(){
     return $table;
 
 });
+
+Route::get('/nota/limite/{valor}', function($valor){
+
+    $dados = array(
+    
+        array("matricula" => "1", "aluno" => "Vinicius", "nota" => "9"),
+        array("matricula" => "2", "aluno" => "Galdino", "nota" => "2"),
+        array("matricula" => "3", "aluno" => "Wesley", "nota" => "8"),
+        array("matricula" => "4", "aluno" => "Danilo", "nota" => "6"),
+        array("matricula" => "5", "aluno" => "Marcola", "nota" => "4")
+
+    );
+
+    $table  = '<table>';
+    $table .= '<thead>';
+    $table .= '<tr>';
+    $table .= '<td><h3>Matricula</h3></td>';
+    $table .= '<td><h3>Aluno</h3></td>';
+    $table .= '<td><h3>Nota</h3></td>';
+    $table .= '</tr>';
+    $table .= '</thead>';
+    $table .= '<tbody>';
+
+    if($valor <= count($dados)){
+
+        $cont = 0;
+
+        foreach ($dados as $dado) {
+
+            $table .= '<tr>';
+            $table .= "<td><center>{$dado["matricula"]}</center></td>";
+            $table .= "<td><center>{$dado["aluno"]}</center></td>";
+            $table .= "<td><center>{$dado["nota"]}</center></td>";
+            $table .= '</tr>';
+
+            $cont++;
+            if($cont >= $valor) break;
+        }
+    }else{
+
+        $table = $table."<li>Tamanho Máximo = ".count($dados)."</li>";
+
+    }
+
+    $table .= '</tbody>';
+    $table .= '</table>';
+
+    return $table;
+
+})->where('valor', '[0-9]+');
