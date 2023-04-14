@@ -239,3 +239,47 @@ Route::get('/nota/limite/{valor}', function($valor){
     return $table;
 
 })->where('valor', '[0-9]+');
+
+Route::get('/nota/lancar/{nota}/{matricula}/{nome?}', function($nota, $matricula, $nome=null){
+
+    $dados = array(
+    
+        array("matricula" => "1", "aluno" => "Vinicius", "nota" => "9"),
+        array("matricula" => "2", "aluno" => "Galdino", "nota" => "2"),
+        array("matricula" => "3", "aluno" => "Wesley", "nota" => "8"),
+        array("matricula" => "4", "aluno" => "Danilo", "nota" => "6"),
+        array("matricula" => "5", "aluno" => "Marcola", "nota" => "4")
+
+    );
+
+    $table  = '<table>';
+    $table .= '<thead>';
+    $table .= '<tr>';
+    $table .= '<td><h3>Matricula</h3></td>';
+    $table .= '<td><h3>Aluno</h3></td>';
+    $table .= '<td><h3>Nota</h3></td>';
+    $table .= '</tr>';
+    $table .= '</thead>';
+    $table .= '<tbody>';
+
+    foreach ($dados as $dado) {
+
+        if($dado["matricula"] == $matricula){
+
+            $dado["nota"] = $nota; 
+
+        }
+
+        $table .= '<tr>';
+        $table .= "<td><center>{$dado["matricula"]}</center></td>";
+        $table .= "<td><center>{$dado["aluno"]}</center></td>";
+        $table .= "<td><center>{$dado["nota"]}</center></td>";
+        $table .= '</tr>';
+    }
+
+    $table .= '</tbody>';
+    $table .= '</table>';
+
+    return $table;
+
+})->where('nota', '[0-9]+')->where('matricula', '[0-9]+')->where('nome', '[A-Za-z]+');
