@@ -252,6 +252,8 @@ Route::get('/nota/lancar/{nota}/{matricula}/{nome?}', function($nota, $matricula
 
     );
 
+    $existeBanco = false;
+
     $table  = '<table>';
     $table .= '<thead>';
     $table .= '<tr>';
@@ -262,24 +264,48 @@ Route::get('/nota/lancar/{nota}/{matricula}/{nome?}', function($nota, $matricula
     $table .= '</thead>';
     $table .= '<tbody>';
 
-    foreach ($dados as $dado) {
+    if($nome != null){
+        foreach ($dados as $dado) {
 
-        if($dado["matricula"] == $matricula){
+            if($dado["aluno"] == $nome){
+                $dado["nota"] = $nota;
+                $existeBanco = true;
+            }   
 
-            $dado["nota"] = $nota; 
+            $table .= '<tr>';
+            $table .= "<td><center>{$dado["matricula"]}</center></td>";
+            $table .= "<td><center>{$dado["aluno"]}</center></td>";
+            $table .= "<td><center>{$dado["nota"]}</center></td>";
+            $table .= '</tr>';
 
         }
+    }else{
+        foreach ($dados as $dado) {
 
-        $table .= '<tr>';
-        $table .= "<td><center>{$dado["matricula"]}</center></td>";
-        $table .= "<td><center>{$dado["aluno"]}</center></td>";
-        $table .= "<td><center>{$dado["nota"]}</center></td>";
-        $table .= '</tr>';
+            if($dado["matricula"] == $matricula){
+
+                $dado["nota"] = $nota;
+                $existeBanco = true;
+
+            }
+            $table .= '<tr>';
+            $table .= "<td><center>{$dado["matricula"]}</center></td>";
+            $table .= "<td><center>{$dado["aluno"]}</center></td>";
+            $table .= "<td><center>{$dado["nota"]}</center></td>";
+            $table .= '</tr>';
+        }
     }
 
     $table .= '</tbody>';
     $table .= '</table>';
 
-    return $table;
+    if($existeBanco == false){
+        
+        $table = "<ul>";
+        $table = $table."<li>NÃO ENCONTRADO!</li>";
 
+    }
+    
+    return $table;
+    
 })->where('nota', '[0-9]+')->where('matricula', '[0-9]+')->where('nome', '[A-Za-z]+');
